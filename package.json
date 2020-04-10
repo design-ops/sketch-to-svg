@@ -12,11 +12,11 @@
     "clean": "rm -rf dist",
     "clobber": "npm run clean && rm -rf node_modules"
   },
-  "repository": "github:design-ops/sketch-to-swiftUI",
+  "repository": "github:design-ops/sketch-to-svg",
   "author": "Design Operations Collective",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/design-ops/sketch-to-swiftUI/issues"
+    "url": "https://github.com/design-ops/sketch-to-svg/issues"
   },
   "dependencies": {
     "@types/extract-zip": "^1.6.2",
