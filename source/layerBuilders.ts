@@ -5,7 +5,7 @@ import fs from 'fs'
 import { SketchFile, Options } from './index'
 
 /** All builders exported from this method will conform to this interface
- * 
+ *
  * @param scope The paper scope to build into
  * @param layer The sketch.Layer to convert into a paper.Item
  * @param sketch The Sketch file this builder can fetch resources from, if needed
@@ -18,7 +18,7 @@ interface BuilderFunc {
 
 /**
  * Layers which can be represented as a rect will be converted by this builder.
- * 
+ *
  * @param layer The layer to convert
  * @returns The created Item (or `null` if it could not be represented as a Paper Rectangle)
  */
@@ -113,7 +113,8 @@ let bitmapBuilder: BuilderFunc = async function (scope, layer, sketch, options) 
 
                 image.onLoad = function () {
                     image.size = new scope.Size(layer.frame.width, layer.frame.height)
-                    image.position = new scope.Point(layer.frame.x + layer.frame.width / 2, layer.frame.y + layer.frame.height / 2)
+                    image.position = new scope.Point(layer.frame.x, layer.frame.y)
+                    image.bounds = new scope.Rectangle(0, 0, layer.frame.width, layer.frame.height)
 
                     // If we don't want to optimize the image, just resolve the promise now
                     if (!options || !options.optimizeImageSize) {
@@ -153,9 +154,9 @@ let bitmapBuilder: BuilderFunc = async function (scope, layer, sketch, options) 
 
 /**
  * Convert a layer's points to a paper Path object.
- * 
+ *
  * NB: The path isn't attached to any layers / groups.
- * 
+ *
  * @param {paper.PaperScope} scope The paper instance to work within
  * @param {sketch.Layer} layer The layer whose points will be converted to a paper.Path
  * @returns {paper.Path} A `Path` created from the points in the layer.
