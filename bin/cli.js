@@ -14,6 +14,7 @@ const argv = yargs
   }).positional('output', {
     describe: 'output folder - defaults to the current folder',
     type: 'string',
+    default: './svg-output/'
   }).option("pages", {
     alias: 'p',
     describe: 'pages to export (default is all pages)'
@@ -83,7 +84,7 @@ Sketch
   })
   .then(layers => {
     console.log(`processing ${layers.length} layers`)
-    const output = (argv.output) ? argv.output : "."
+    const output = argv.output
     let options = { sketchFilePath: sketchFile, optimizeImageSize: true, optimizeImageSizeFactor: 1 }
 
     layers.forEach(layer => {
