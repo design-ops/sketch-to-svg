@@ -23,14 +23,12 @@ const argv = yargs
   .help()
   .argv
 
-console.log(argv)
-
 const sketchFile = path.resolve(argv.sketch)
 const isValidSketchFile = (file) => {
   const extenstion = ".sketch"
   if (file.substring(sketchFile.length-extenstion.length) == extenstion) {
-  const stat = fs.statSync(file)
-  return stat.isFile
+    const stat = fs.statSync(file)
+    return stat.isFile
   }
   return false
 }
@@ -52,7 +50,7 @@ const pagesToProcess = (sketch, pages) => {
 }
 // make sure it's actually a sketch file, otherwise report error and return help
 if (!isValidSketchFile(sketchFile)) {
-  console.error(`Error: Sketch file (${sketchFile}) not found`)
+  console.error(`🚨Error: not a valid sketch file '${sketchFile}'\n\n`)
   yargs.showHelp()
   exit(410)
 }
