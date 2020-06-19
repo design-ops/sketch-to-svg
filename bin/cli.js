@@ -75,7 +75,7 @@ Sketch
 
     console.log(`processing ${sketchFile}`)
     let layers = sketch.pages
-      .filter(page => pages.pages.indexOf(page.name) > -1)
+      .filter(page => pages.pages.map(name => name.toLowerCase()).indexOf(page.name.toLowerCase()) > -1)
       .flatMap(page => { return page.getLayers() })
 
     return layers
