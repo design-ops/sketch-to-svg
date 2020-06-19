@@ -15,9 +15,9 @@ const argv = yargs
     describe: 'output folder - defaults to the current folder',
     type: 'string',
     default: './svg-output/'
-  }).option("pages", {
+  }).option("page", {
     alias: 'p',
-    describe: 'pages to export (default is all pages)'
+    describe: 'page to export (if not are supplied all pages are processed)'
   })
   })
   .help()
@@ -35,42 +35,43 @@ const isValidSketchFile = (file) => {
 const pagesToProcess = (sketch, pages) => {
   const validNames = sketch.pages.flatMap(page => page.name)
   if (pages){
-  const pagesArr = function(){
-    if (Array.isArray(pages)) return pages
-    return [pages]
-  }()
-  return { 
-      pages: pagesArr.filter(pageName => validNames.indexOf(pageName) > -1),
-      supplied: pagesArr 
-      }
-  } else {
-  // @TODO get all of the pages and return them here
-  return {pages: validNames, supplied: []}
+    const pagesArr = function(){
+      if (Array.isArray(pages)) return pages
+      return [pages]
+    }()
+    const validNamesLower = validNames.map( name => name.toLowerCase())
+    return { 
+        pages: pagesArr.filter(pageName => validNamesLower.indexOf(pageName.toLowerCase()) > -1),
+        supplied: pagesArr 
+        }
+    } else {
+    // @TODO get all of the pages and return them here
+    return {pages: validNames, supplied: []}
   }
 }
 // make sure it's actually a sketch file, otherwise report error and return help
 if (!isValidSketchFile(sketchFile)) {
   console.error(`🚨Error: not a valid sketch file '${sketchFile}'\n\n`)
-  yargs.showHelp()
+  // yargs.showHelp()
   exit(410)
 }
 
 Sketch
   .fromFile(sketchFile)
   .then(sketch => {
-    let pages = pagesToProcess(sketch, argv.pages)
+    let pages = pagesToProcess(sketch, argv.page)
     // handle supplied pages not being 
     if (pages.pages.length == 0) {
       const availableNames = sketch.pages.map(page => page.name).join("', '")
       const suppliedNames = pages.supplied.join("', '")
       console.error(`Couldn't find any requested pages - you asked for '${suppliedNames}' and the document contains '${availableNames}'.`)
-      yargs.showHelp()
+      // yargs.showHelp()
       exit(404)
     } else if (pages.pages.length < pages.supplied.length) {
       const availableNames = sketch.pages.map(page => page.name).join("', '")
       const processedNames = pages.pages.join("', '")
       const missingNames = pages.supplied.filter(name => pages.pages.indexOf(name) == -1)
-      console.warn(`Warning: pages called '${missingNames}' were not found, so only processing '${processedNames}'. The document contains '${availableNames}'.`)
+      console.warn(`🚨Warning: pages called '${missingNames}' were not found, so only processing '${processedNames}'. The document contains '${availableNames}'.`)
     }
 
     console.log(`processing ${sketchFile}`)
