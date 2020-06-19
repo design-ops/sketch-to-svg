@@ -64,14 +64,14 @@ Sketch
     if (pages.pages.length == 0) {
       const availableNames = sketch.pages.map(page => page.name).join("', '")
       const suppliedNames = pages.supplied.join("', '")
-      console.error(`Couldn't find any requested pages - you asked for '${suppliedNames}' and the document contains '${availableNames}'.`)
+      console.error(`🚨Error: Couldn't find any requested pages - you asked for '${suppliedNames}' and the document contains '${availableNames}'.\n`)
       // yargs.showHelp()
       exit(404)
     } else if (pages.pages.length < pages.supplied.length) {
       const availableNames = sketch.pages.map(page => page.name).join("', '")
       const processedNames = pages.pages.join("', '")
       const missingNames = pages.supplied.filter(name => pages.pages.indexOf(name) == -1)
-      console.warn(`🚨Warning: pages called '${missingNames}' were not found, so only processing '${processedNames}'. The document contains '${availableNames}'.`)
+      console.warn(`🚨Warning: pages called '${missingNames}' were not found, so only processing '${processedNames}'. The document contains '${availableNames}'.\n`)
     }
 
     console.log(`processing ${sketchFile}`)
