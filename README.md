@@ -2,7 +2,40 @@
 
 Exports layers from a .sketch file to an svg, without needing Sketch installed.
 
-## Usage
+## Usage as a command
+
+### Installation
+
+Install globally  `npm i sketch-to-svg -g` 
+
+Or install locally `npm i sketch-to-svg` (or checkout this repo) and then `npm link` (to enable the `sketch-to-svg` command in the terminal)
+
+### Examples
+
+* Export all layers on all pages from my-design.sketch into an 'svg-output' folder in the current folder:
+    * `sketch-to-svg ./my-design.sketch` 
+* Export all layers on all pages from my-design.sketch into the /specific/svg/location/ folder:
+    * `sketch-to-svg ./my-design.sketch ./specific/svg/location/`
+* Export all layers from 'Page 1' and 'Page 2' from my-design.sketch into an 'svg-output' folder in the current folder:
+    * `sketch-to-svg -p 'Page 1' -p 'Page 2' ./my-design.sketch`
+
+### Documentation
+
+Just running `sketch-to-svg` will output the help:
+```
+export svg from sketch
+
+Positionals:
+  sketch  path to the sketch file                                       [string]
+  output  output folder - defaults to the current folder
+                                             [string] [default: "./svg-output/"]
+
+Options:
+  --version    Show version number                                     [boolean]
+  --help       Show help                                               [boolean]
+  --pages, -p  pages to export (default is all pages)```
+
+## Usage as a library
 
 ```javascript
 /// At the moment you need to pass in a sketch-constructor layer.
