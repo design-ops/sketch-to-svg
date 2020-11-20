@@ -231,6 +231,6 @@ function styleItem(scope: paper.PaperScope, style: any /* sketch.Style */, item:
         item.fillColor = new scope.Color(fill.color.red, fill.color.green, fill.color.blue, fill.color.alpha)
     }
 
-    item.strokeCap = conversions.convertLineCapStyle(style.borderOptions.lineCapStyle) || null
-    item.strokeJoin = conversions.convertLineJoinStyle(style.borderOptions.lineJoinStyle) || null
+    item.strokeCap = conversions.convertLineCapStyle(style.borderOptions.lineCapStyle) || 'butt'
+    item.strokeJoin = conversions.convertLineJoinStyle(style.borderOptions.lineJoinStyle) || 'miter'
 }

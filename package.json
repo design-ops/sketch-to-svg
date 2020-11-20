@@ -2,7 +2,9 @@
   "name": "sketch-to-svg",
   "version": "1.0.2",
   "description": "Convert layers in a Sketch file to SVG",
-  "bin": "./bin/cli.js",
+  "bin": {
+    "sketch-to-svg": "bin/cli.js"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -21,24 +23,24 @@
   },
   "dependencies": {
     "@types/extract-zip": "^1.6.2",
-    "@types/sharp": "^0.23.0",
-    "@types/uuid": "^3.4.6",
-    "canvas": "^2.5.0",
-    "extract-zip": "^1.6.7",
-    "jsdom": "^16.2",
-    "paper": "0.12.3",
-    "sketch-constructor": "^1.14.0",
-    "source-map-support": "^0.5.12",
-    "uuid": "^3.3.3",
-    "xml-formatter": "^1.2.0",
-    "yargs": "^15.3.1"
+    "@types/sharp": "^0.23.1",
+    "@types/uuid": "^3.4.9",
+    "canvas": "^2.6.1",
+    "extract-zip": "^1.7.0",
+    "paper-jsdom": "0.12.11",
+    "sharp": "^0.23.2",
+    "sketch-constructor": "^1.24.2",
+    "source-map-support": "^0.5.19",
+    "uuid": "^3.4.0",
+    "xml-formatter": "^1.2.1",
+    "yargs": "^15.4.1"
   },
   "optionalDependencies": {
     "sharp": "^0.23.2"
   },
   "devDependencies": {
-    "jest": "^25.1.0",
-    "typescript": "^3.7.2"
+    "jest": "^25.5.4",
+    "typescript": "^3.9.7"
   },
   "jest": {
     "verbose": true
