@@ -32,7 +32,7 @@
     "source-map-support": "^0.5.19",
     "uuid": "^8.3.2",
     "xml-formatter": "^1.2.1",
-    "yargs": "^15.4.1"
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "jest": "^25.5.4",
