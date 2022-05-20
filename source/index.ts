@@ -1,7 +1,7 @@
 import paper from 'paper'
 import conversions from './conversions'
 import layerBuilders from './layerBuilders'
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 import fs from 'fs'
 import extract from 'extract-zip'
 import os from 'os'
@@ -61,7 +61,7 @@ export type Options = {
 
 export class SketchFile {
     private filepath: string
-    private id: string = uuid()
+    private id: string = uuidv4()
 
     contentsPath(): Promise<string> {
         let sourcePath = this.filepath
