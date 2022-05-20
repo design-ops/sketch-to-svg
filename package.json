@@ -31,7 +31,7 @@
     "sketch-constructor": "^1.24.2",
     "source-map-support": "^0.5.19",
     "uuid": "^8.3.2",
-    "xml-formatter": "^1.2.1",
+    "xml-formatter": "^2.6.1",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
