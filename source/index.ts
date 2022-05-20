@@ -1,7 +1,7 @@
 import paper from 'paper'
 import conversions from './conversions'
 import layerBuilders from './layerBuilders'
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 import fs from 'fs'
 import extract from 'extract-zip'
 import os from 'os'
@@ -61,7 +61,7 @@ export type Options = {
 
 export class SketchFile {
     private filepath: string
-    private id: string = uuid()
+    private id: string = uuidv4()
 
     contentsPath(): Promise<string> {
         let sourcePath = this.filepath
@@ -70,18 +70,13 @@ export class SketchFile {
         // If we have already unzipped, just return the path
         if (fs.existsSync(path)) { return Promise.resolve(path) }
 
-        return new Promise((resolve, reject) => {
-            // Unzip the file to that folder
-            extract(sourcePath, { dir: path }, function (error: any) {
-                if (error) {
-                    console.log(`WARNING: Failed to extract Sketch file contents from ${sourcePath} to ${path}`)
-                    console.log(error)
-                    fs.unlinkSync(path)
-                    reject(error)
-                } else {
-                    resolve(path)
-                }
-            })
+        return extract(sourcePath, { dir: path }).then(() => {
+            return path
+        }, (reason) => {
+            console.log(`WARNING: Failed to extract Sketch file contents from ${sourcePath} to ${path}`)
+            console.log(reason)
+            fs.unlinkSync(path)
+            throw reason
         })
     }
 
