@@ -228,9 +228,44 @@ function styleItem(scope: paper.PaperScope, style: any /* sketch.Style */, item:
 
     let fill = style.fills.find((element: any) => { return element.isEnabled })
     if (fill != undefined) {
-        item.fillColor = new scope.Color(fill.color.red, fill.color.green, fill.color.blue, fill.color.alpha)
+        if (fill.fillType === 0 && fill.color != undefined) {
+            item.fillColor = new scope.Color(fill.color.red, fill.color.green, fill.color.blue, fill.color.alpha)
+        }
+        if (fill.fillType === 1 && fill.gradient != undefined) {
+            if (fill.gradient.gradientType === 0) { // linear
+                const from = JSON.parse( "[" + fill.gradient.from.slice(1,-1) + "]")
+                const to = JSON.parse( "[" + fill.gradient.to.slice(1,-1) + "]")
+                const width = scope.view.viewSize.width
+                const height = scope.view.viewSize.height
+                const gradient: any = { gradient: {
+                        stops: extractGradientStops(fill.gradient.stops),
+                        radial: false
+                    },
+                    origin: transformCoordinate(from, width, height),
+                    destination: transformCoordinate(to, width, height)
+                }
+                item.fillColor = gradient
+            } else if (fill.gradient.gradientType === 1) { //radial
+                // TODO: Support other gradient types
+            } else if (fill.gradient.gradientType === 2) { //angular
+                // TODO: Support other gradient types
+            }
+        }
     }
 
     item.strokeCap = conversions.convertLineCapStyle(style.borderOptions.lineCapStyle) || 'butt'
     item.strokeJoin = conversions.convertLineJoinStyle(style.borderOptions.lineJoinStyle) || 'miter'
+}
+
+const transformCoordinate = (xyPair: any, width: number, height: number) => {
+    const x = xyPair[0] * width
+    const y = xyPair[1] * height
+    return [x, y]
+}
+
+const extractGradientStops = (stops: [any]) => {
+    return stops.map(stop => {
+        const color = new paper.Color(stop.color.red, stop.color.green, stop.color.blue, stop.color.alpha)
+        return new paper.GradientStop(color);
+    })
 }
