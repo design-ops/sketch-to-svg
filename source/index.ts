@@ -198,7 +198,8 @@ async function renderLayer(scope: paper.PaperScope, layer: any /* sketch.Layer *
 
                 // Rotate if needed
                 if (layer.rotation) {
-                    newGroup.rotate(layer.rotation)
+                    // Rotation in sketch is the opposite than in SVG (therefore we add a -)
+                    newGroup.rotate(-layer.rotation)
                 }
 
                 // Set the opacity
