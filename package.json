@@ -22,16 +22,16 @@
     "url": "https://github.com/design-ops/sketch-to-svg/issues"
   },
   "dependencies": {
-    "@types/sharp": "^0.30.2",
-    "@types/uuid": "^8.3.4",
+    "@types/sharp": "^0.32.0",
+    "@types/uuid": "^10.0.0",
     "canvas": "^2.6.1",
     "extract-zip": "^2.0.1",
-    "paper-jsdom": "0.12.15",
-    "sharp": "^0.32.6",
+    "paper-jsdom": "0.12.18",
+    "sharp": "^0.33.4",
     "sketch-constructor": "^1.24.2",
     "source-map-support": "^0.5.19",
-    "uuid": "^8.3.2",
-    "xml-formatter": "^1.2.1",
+    "uuid": "^10.0.0",
+    "xml-formatter": "^3.6.3",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
