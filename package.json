@@ -27,7 +27,7 @@
     "canvas": "^2.6.1",
     "extract-zip": "^2.0.1",
     "paper-jsdom": "0.12.15",
-    "sharp": "^0.30.4",
+    "sharp": "^0.32.6",
     "sketch-constructor": "^1.24.2",
     "source-map-support": "^0.5.19",
     "uuid": "^8.3.2",
