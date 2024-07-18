@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "typescript": "^3.9.7"
+    "typescript": "^5.5"
   },
   "jest": {
     "verbose": true
